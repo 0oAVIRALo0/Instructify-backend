@@ -30,6 +30,10 @@ app.use(cookieParser());
 
 const PORT = process.env.PORT || 4000;
 
+app.get('/health', (req, res) => {
+  res.send('Server up time: ' + new Date().toLocaleString());
+})
+
 // Routes import
 import userRouter from './src/routes/user.router.js';
 
