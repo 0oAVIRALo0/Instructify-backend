@@ -8,7 +8,7 @@ COPY backend/package*.json ./
 RUN npm install
 
 # Copy the entire project (including the src folder) into the container
-COPY . .
+COPY backend/ .
 
 # Expose the port
 EXPOSE 4000
