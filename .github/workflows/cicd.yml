@@ -16,7 +16,7 @@ jobs:
      - name: Build Docker Image
        run: docker build -t aviral30/instructify-backend .
      - name: Push Docker Image
-       run: docker push aviral30/instructify-backend:latest 
+       run: docker push aviral30/instructify-backend:latest
 
   deploy:
    needs: build
