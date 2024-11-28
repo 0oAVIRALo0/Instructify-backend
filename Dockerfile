@@ -1,7 +1,17 @@
 FROM node:alpine3.18
+
+# Set the working directory inside the container
 WORKDIR /app
+
+# Copy the package.json and package-lock.json files to install dependencies
 COPY backend/package*.json ./
 RUN npm install
-COPY backend/index.js /app/index.js
+
+# Copy the entire project (including the src folder) into the container
+COPY . .
+
+# Expose the port
 EXPOSE 4000
-CMD ["npm", "start"] 
+
+# Start the application
+CMD ["npm", "start"]
