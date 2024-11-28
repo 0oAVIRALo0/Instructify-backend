@@ -28,7 +28,7 @@ const corsOptions = {
 app.use(cors(corsOptions));
 app.use(cookieParser());
 
-const PORT = process.env.PORT || 8000;
+const PORT = process.env.PORT || 4000;
 
 // Routes import
 import userRouter from './src/routes/user.router.js';
