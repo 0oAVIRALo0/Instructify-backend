@@ -38,7 +38,7 @@ app.get('/health', (req, res) => {
 import userRouter from './src/routes/user.router.js';
 
 // Routes declaration
-app.use('/api/v1/user', userRouter);
+app.use('/user', userRouter);
 
 // Database connection and server start
 connectDB().then(() => { 
