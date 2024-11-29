@@ -2,6 +2,7 @@ import { User } from "../models/index.js";
 
 const generateTokens = async (userId) => {
   try {
+    console.log("Generating tokens");
     const user = await User.findById(userId)
     const accessToken = user.generateAccessToken()
     const refreshToken = user.generateRefreshToken()

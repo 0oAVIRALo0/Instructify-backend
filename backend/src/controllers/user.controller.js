@@ -42,6 +42,8 @@ const registerUser = asyncHandler(async (req, res) => {
     console.log("Admin created successfully");
 
     const { accessToken, refreshToken } = await generateTokens(admin._id);
+    console.log("Access Token:", accessToken);
+    console.log("Refresh Token:", refreshToken);
 
     admin.refreshToken = refreshToken;
 
