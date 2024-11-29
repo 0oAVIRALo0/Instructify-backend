@@ -23,6 +23,7 @@ const registerUser = asyncHandler(async (req, res) => {
   })
 
   if (existingUser) {
+    console.log("User already exists");
     throw new errorHandler(409, "User with email or username already exists")
   }
 
@@ -38,11 +39,15 @@ const registerUser = asyncHandler(async (req, res) => {
       isVerified: true
     });
 
+    console.log("Admin created successfully");
+
     const { accessToken, refreshToken } = await generateTokens(admin._id);
 
     admin.refreshToken = refreshToken;
 
     const createdAdmin = await User.findById(admin._id).select("-password -refreshToken");
+
+    console.log("Created Admin:", createdAdmin);
 
     if (!createdAdmin) {
       throw new errorHandler(500, "Something went wrong while registering the admin");
@@ -75,6 +80,8 @@ const registerUser = asyncHandler(async (req, res) => {
     verificationCode
   })
 
+  console.log("User created successfully");
+
   sendVerificationEmail(email, verificationCode, fullName)
 
   const { accessToken, refreshToken } = await generateTokens(user._id)
@@ -82,6 +89,8 @@ const registerUser = asyncHandler(async (req, res) => {
   user.refreshToken = refreshToken
 
   const createdUser = await User.findById(user._id).select("-password -refreshToken")
+
+  console.log("Created User:", createdUser);
 
   if (!createdUser) {
     throw new errorHandler(500, "Something went wrong while registering the user")
