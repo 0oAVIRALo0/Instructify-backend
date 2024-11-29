@@ -10,6 +10,7 @@ import { sendVerificationEmail, welcomeEmail } from "../service/index.js";
 const registerUser = asyncHandler(async (req, res) => { 
   const validatedData = registerUserValidation.parse(req.body);
   const { fullName, email, username, password } = validatedData;
+  console.log("Request Body:", req.body);
 
   if (
     [fullName, email, username, password].some((field) => field?.trim() === "")

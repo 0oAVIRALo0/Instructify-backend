@@ -39,6 +39,7 @@ import userRouter from './src/routes/user.router.js';
 
 // Routes declaration
 app.use('/user', userRouter);
+console.log('User routes loaded');
 
 // Database connection and server start
 connectDB().then(() => { 
