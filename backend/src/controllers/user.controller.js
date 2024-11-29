@@ -10,7 +10,7 @@ import { sendVerificationEmail, welcomeEmail } from "../service/index.js";
 const registerUser = asyncHandler(async (req, res) => { 
   const validatedData = registerUserValidation.parse(req.body);
   const { fullName, email, username, password } = validatedData;
-  console.log("Request Body:", req.body);
+  // console.log("Request Body:", req.body);
 
   if (
     [fullName, email, username, password].some((field) => field?.trim() === "")
@@ -39,17 +39,17 @@ const registerUser = asyncHandler(async (req, res) => {
       isVerified: true
     });
 
-    console.log("Admin created successfully");
+    // console.log("Admin created successfully");
 
     const { accessToken, refreshToken } = await generateTokens(admin._id);
-    console.log("Access Token:", accessToken);
-    console.log("Refresh Token:", refreshToken);
+    // console.log("Access Token:", accessToken);
+    // console.log("Refresh Token:", refreshToken);
 
     admin.refreshToken = refreshToken;
 
     const createdAdmin = await User.findById(admin._id).select("-password -refreshToken");
 
-    console.log("Created Admin:", createdAdmin);
+    // console.log("Created Admin:", createdAdmin);
 
     if (!createdAdmin) {
       throw new errorHandler(500, "Something went wrong while registering the admin");

@@ -20,7 +20,14 @@ app.use(helmet());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 const corsOptions = {
-  origin: 'http://13.233.126.240:5173',  
+  origin: function (origin, callback) {
+    const allowedOrigins = ['http://13.233.126.240:5173', 'http://localhost:5173'];
+    if (allowedOrigins.includes(origin) || !origin) {
+      callback(null, true);  // Allow the request
+    } else {
+      callback(new Error('Not allowed by CORS'));  // Reject the request
+    }
+  },  
   methods: 'GET,POST,PUT,DELETE',  
   allowedHeaders: 'Content-Type, Authorization', 
   credentials: true,  
