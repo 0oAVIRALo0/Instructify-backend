@@ -85,14 +85,17 @@ const registerUser = asyncHandler(async (req, res) => {
   console.log("User created successfully");
 
   sendVerificationEmail(email, verificationCode, fullName)
+  console.log("Verification email sent");
 
   const { accessToken, refreshToken } = await generateTokens(user._id)
+  console.log("Access Token:", accessToken);
+  console.log("Refresh Token:", refreshToken);
   
   user.refreshToken = refreshToken
 
   const createdUser = await User.findById(user._id).select("-password -refreshToken")
-
   console.log("Created User:", createdUser);
+
 
   if (!createdUser) {
     throw new errorHandler(500, "Something went wrong while registering the user")
