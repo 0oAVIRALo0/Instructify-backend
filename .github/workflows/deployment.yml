@@ -24,5 +24,7 @@ jobs:
    steps:
     - name: Pull Docker Image
       run: docker pull aviral30/instructify-backend:latest
+    - name: Delete Existing Docker Container
+      run: docker rm -f instructify-backend-container
     - name: Run Docker Container
       run: docker run -d -p 4000:4000 --name instructify-backend-container -e MONGO_PASSWORD='${{ secrets.MONGO_PASSWORD }}' -e ACCESS_TOKEN_SECRET='${{ secrets.ACCESS_TOKEN_SECRET }}' -e REFRESH_TOKEN_SECRET='${{ secrets.REFRESH_TOKEN_SECRET }}' -e ACCESS_TOKEN_SECRET_EXPIRY='${{ secrets.ACCESS_TOKEN_SECRET_EXPIRY }}' -e REFRESH_TOKEN_SECRET_EXPIRY='${{ secrets.REFRESH_TOKEN_SECRET_EXPIRY }}' -e ADMIN_EMAIL='${{ secrets.ADMIN_EMAIL }}' -e ADMIN_PASSWORD='${{ secrets.ADMIN_PASSWORD }}' -e ADMIN_FULLNAME='${{ secrets.ADMIN_FULLNAME }}' -e ADMIN_USERNAME='${{ secrets.ADMIN_USERNAME }}' -e CLOUDINARY_API_KEY='${{ secrets.CLOUDINARY_API_KEY }}' -e CLOUDINARY_API_SECRET='${{ secrets.CLOUDINARY_API_SECRET }}' -e CLOUDINARY_CLOUD_NAME='${{ secrets.CLOUDINARY_CLOUD_NAME }}' -e SENDER_ADDRESS='${{ secrets.SENDER_ADDRESS }}' -e SENDER_PASSWORD='${{ secrets.SENDER_PASSWORD }}' aviral30/instructify-backend:latest
